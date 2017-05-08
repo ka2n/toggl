@@ -51,6 +51,19 @@ func (cl *Client) GetCurrentTimeEntry() (CurrentResponse, error) {
 	return response, nil
 }
 
+func (cl *Client) GetTimeEntries() (response []TimeEntry, err error) {
+	res, err := cl.do("GET", "time_entries", nil)
+	if err != nil {
+		return nil, err
+	}
+
+	enc := json.NewDecoder(res.Body)
+	if err := enc.Decode(&response); err != nil {
+		return nil, err
+	}
+	return response, nil
+}
+
 func (cl *Client) PostStartTimeEntry(timeEntry TimeEntry) (response CurrentResponse, err error) {
 	res, err := cl.do("POST", "time_entries/start", timeEntry.AddParam())
 	if err != nil {
