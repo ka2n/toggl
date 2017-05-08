@@ -10,7 +10,7 @@ import (
 
 	"github.com/sachaos/toggl/cache"
 	"github.com/sachaos/toggl/command"
-	"github.com/sachaos/toggl/lib"
+	toggl "github.com/sachaos/toggl/lib"
 	"github.com/spf13/viper"
 	"github.com/urfave/cli"
 )
@@ -53,6 +53,12 @@ func main() {
 			Name:   "stop",
 			Usage:  "End time entry",
 			Action: cmdApp.CmdStop,
+			Flags:  []cli.Flag{},
+		},
+		{
+			Name:   "resume",
+			Usage:  "resume last time entry",
+			Action: cmdApp.CmdRestart,
 			Flags:  []cli.Flag{},
 		},
 		{
