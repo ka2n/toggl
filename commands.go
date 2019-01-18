@@ -21,6 +21,11 @@ var projectIDFlag = cli.IntFlag{
 	Usage: "Project id",
 }
 
+var clientNameFlag = cli.BoolFlag{
+	Name:  "show-client, C",
+	Usage: "Show client name",
+}
+
 func CommandNotFound(c *cli.Context, command string) {
 	fmt.Fprintf(os.Stderr, "%s: '%s' is not a %s command. See '%s --help'.", c.App.Name, command, c.App.Name, c.App.Name)
 	os.Exit(2)

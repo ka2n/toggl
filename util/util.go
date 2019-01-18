@@ -27,7 +27,7 @@ func (w *TabWriter) Flush() {
 }
 
 func (w *TabWriter) Write(record []string) error {
-	string := strings.Join(record[:], "\t")
-	fmt.Fprintln(w.w, string)
+	line := strings.Join(record[:], "\t")
+	fmt.Fprintln(w.w, line)
 	return nil
 }

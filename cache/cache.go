@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/sachaos/toggl/lib"
+	toggl "github.com/sachaos/toggl/lib"
 )
 
 var c *Cache
@@ -18,6 +18,7 @@ type Cache struct {
 type CacheContent struct {
 	CurrentTimeEntry toggl.TimeEntry  `json:"current_time_entry"`
 	Projects         toggl.Projects   `json:"projects"`
+	Clients          toggl.TClients   `json:"clients"`
 	Workspaces       toggl.Workspaces `json:"workspaces"`
 }
 
@@ -69,6 +70,11 @@ func (c *Cache) SetCurrentTimeEntry(timeEntry toggl.TimeEntry) {
 func SetProjects(projects toggl.Projects) { c.SetProjects(projects) }
 func (c *Cache) SetProjects(projects toggl.Projects) {
 	c.Content.Projects = projects
+}
+
+func SetClients(clients toggl.TClients) { c.SetClients(clients) }
+func (c *Cache) SetClients(clients toggl.TClients) {
+	c.Content.Clients = clients
 }
 
 func SetWorkspaces(workspaces toggl.Workspaces) { c.SetWorkspaces(workspaces) }

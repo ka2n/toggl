@@ -20,6 +20,7 @@ type Project struct {
 	Name          string `json:"name"`
 	Template      bool   `json:"template"`
 	Wid           int    `json:"wid"`
+	Cid           int    `json:"cid"`
 }
 
 type Projects []Project

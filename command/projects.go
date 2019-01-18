@@ -4,7 +4,7 @@ import (
 	"strconv"
 
 	"github.com/sachaos/toggl/cache"
-	"github.com/sachaos/toggl/lib"
+	toggl "github.com/sachaos/toggl/lib"
 	"github.com/spf13/viper"
 	"github.com/urfave/cli"
 )
@@ -25,12 +25,29 @@ func (app *App) CmdProjects(c *cli.Context) error {
 		return err
 	}
 
+	var clients toggl.TClients
+	if c.IsSet("show-client") {
+		clients, err = app.getClients(c)
+		if err != nil {
+			return err
+		}
+	}
+
 	writer := NewWriter(c)
 
 	defer writer.Flush()
 
 	for _, project := range projects {
-		writer.Write([]string{strconv.Itoa(project.ID), project.Name})
+		if clients != nil {
+			var clientName string
+			if project.Cid != 0 {
+				client, _ := clients.FindByID(project.Cid)
+				clientName = client.Name
+			}
+			writer.Write([]string{strconv.Itoa(project.ID), clientName, project.Name})
+		} else {
+			writer.Write([]string{strconv.Itoa(project.ID), project.Name})
+		}
 	}
 
 	return nil

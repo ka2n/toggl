@@ -76,6 +76,14 @@ func main() {
 			Name:   "projects",
 			Usage:  "Show projects on current workspaces",
 			Action: cmdApp.CmdProjects,
+			Flags: []cli.Flag{
+				clientNameFlag,
+			},
+		},
+		{
+			Name:   "clients",
+			Usage:  "Show clients",
+			Action: cmdApp.CmdClients,
 		},
 		{
 			Name:   "local",
